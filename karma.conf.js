@@ -2,7 +2,7 @@
 // Generated on Tue Sep 17 2019 19:39:09 GMT-0400 (EDT)
 
 module.exports = function (config) {
-  config.set({
+  const opts = {
 
     // base path that will be used to resolve all patterns (eg. files, exclude)
     basePath: '',
@@ -47,7 +47,7 @@ module.exports = function (config) {
 
     // start these browsers
     // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
-    browsers: ['ChromeHeadless'],
+    browsers: ['ChromeHeadless', 'FirefoxHeadless'],
 
     // Continuous Integration mode
     // if true, Karma captures browsers, runs the tests and exits
@@ -61,5 +61,30 @@ module.exports = function (config) {
       mode: 'development',
       node: false
     }
-  })
+  }
+
+  if (process.env.CI === 'true') {
+    // https://github.com/karma-runner/karma-browserstack-launcher
+    opts.browserStack = {
+      project: 'dd-trace-js'
+    }
+
+    opts.customLaunchers = {
+      bs_chrome_mac: {
+        base: 'BrowserStack',
+        browser: 'Chrome',
+        browser_version: '76.0',
+        os: 'Windows',
+        os_version: '10'
+      }
+    }
+
+    opts.reporters = ['dots', 'BrowserStack']
+
+    for (const browser of opts.customLaunchers) {
+      opts.browsers.push(browser)
+    }
+  }
+
+  config.set(opts)
 }
