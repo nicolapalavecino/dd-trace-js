@@ -70,12 +70,36 @@ module.exports = function (config) {
     }
 
     opts.customLaunchers = {
-      bs_chrome_mac: {
+      bs_edge: {
         base: 'BrowserStack',
-        browser: 'Chrome',
-        browser_version: '76.0',
+        browser: 'Edge',
+        browser_version: '18.0',
         os: 'Windows',
         os_version: '10'
+      },
+
+      bs_ie11: {
+        base: 'BrowserStack',
+        browser: 'IE',
+        browser_version: '11.0',
+        os: 'Windows',
+        os_version: '10'
+      },
+
+      bs_ie10: {
+        base: 'BrowserStack',
+        browser: 'IE',
+        browser_version: '10.0',
+        os: 'Windows',
+        os_version: '8'
+      },
+
+      bs_safari: {
+        base: 'BrowserStack',
+        browser: 'Safari',
+        browser_version: '12.0',
+        os: 'OS X',
+        os_version: 'Mojave'
       }
     }
 
