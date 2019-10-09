@@ -9,6 +9,10 @@ module.exports = config => {
     browsers: ['bs_chrome_mac'],
 
     // https://github.com/karma-runner/karma-browserstack-launcher
+    browserStack: {
+      project: 'dd-trace-js'
+    },
+
     customLaunchers: {
       bs_chrome_mac: {
         base: 'BrowserStack',
